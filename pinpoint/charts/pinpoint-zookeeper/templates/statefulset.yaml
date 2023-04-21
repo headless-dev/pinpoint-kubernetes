@@ -86,3 +86,15 @@ spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 1000
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: zookeeper-claim
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
+        volumeMode: Filesystem
