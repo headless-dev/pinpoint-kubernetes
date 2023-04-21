@@ -86,6 +86,7 @@ spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 1000
+  {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
@@ -98,3 +99,4 @@ spec:
           requests:
             storage: {{ .Values.persistence.size }}
         volumeMode: Filesystem
+  {{- end }}
