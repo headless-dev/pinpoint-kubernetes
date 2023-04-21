@@ -67,6 +67,8 @@ spec:
             subPath: hbase-site.xml
           {{- if .Values.persistence.enabled }}
           - name: data
+            mountPath: /home/pinpoint/hbase
+          - name: data
             mountPath: /home/pinpoint/zookeeper
           {{- end }}
   {{- if .Values.persistence.enabled }}
