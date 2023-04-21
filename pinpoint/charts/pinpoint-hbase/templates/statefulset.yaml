@@ -66,8 +66,8 @@ spec:
             mountPath: /opt/hbase/hbase-1.2.6/conf/hbase-site.xml
             subPath: hbase-site.xml
           {{- if .Values.persistence.enabled }}
-          - mountPath: /home/pinpoint/zookeeper
-            name: hbase-claim
+          - name: data
+            mountPath: /home/pinpoint/zookeeper
           {{- end }}
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
