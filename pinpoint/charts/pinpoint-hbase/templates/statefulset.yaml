@@ -53,6 +53,8 @@ spec:
           - name: hbase-config
             mountPath: /opt/hbase/hbase-1.2.6/conf/hbase-site.xml
             subPath: hbase-site.xml
+          - mountPath: /home/pinpoint/zookeeper
+            name: hbase-claim
       volumes:
         - name: hbase-config
           configMap:
@@ -60,3 +62,6 @@ spec:
             items:
               - key: hbase-site.xml
                 path: hbase-site.xml
+        - name: zookeeper-volume
+          persistentVolumeClaim:
+            claimName: hbase-claim

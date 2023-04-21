@@ -22,7 +22,8 @@ spec:
 {{- end }}
       volumes:
         - name: datadir
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: zookeeper-claim
       containers:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
