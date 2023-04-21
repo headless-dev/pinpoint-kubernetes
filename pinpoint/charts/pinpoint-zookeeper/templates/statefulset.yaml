@@ -27,9 +27,9 @@ spec:
             claimName: zookeeper-claim
       {{- end }}
       containers:
-        - name: kubernetes-zookeeper
-          imagePullPolicy: Always
-          image: "registry.k8s.io/kubernetes-zookeeper:1.0-3.4.10"
+        - name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           resources:
             requests:
               memory: "1Gi"
