@@ -88,10 +88,8 @@ spec:
         fsGroup: 1000
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: zookeeper-claim
+    - metadata:
+        name: datadir
       spec:
         accessModes:
           - ReadWriteOnce

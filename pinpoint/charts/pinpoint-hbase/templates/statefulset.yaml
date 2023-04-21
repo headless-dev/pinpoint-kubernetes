@@ -35,7 +35,7 @@ spec:
               - key: hbase-site.xml
                 path: hbase-site.xml
         {{- if .Values.persistence.enabled }}
-        - name: zookeeper-volume
+        - name: data
           persistentVolumeClaim:
             claimName: hbase-claim
         {{- end }}
@@ -71,10 +71,8 @@ spec:
           {{- end }}
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: hbase-claim
+    - metadata:
+        name: data
       spec:
         accessModes:
           - ReadWriteOnce
