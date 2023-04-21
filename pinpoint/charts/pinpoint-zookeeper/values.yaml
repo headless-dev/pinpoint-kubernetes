@@ -4,4 +4,6 @@ podAnnotations: {}
 
 affinity: {}
 
-storage: 10Gi
+persistence:
+  enabled: true
+  size: 10Gi

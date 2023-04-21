@@ -63,5 +63,9 @@ spec:
               - key: hbase-site.xml
                 path: hbase-site.xml
         - name: zookeeper-volume
+          {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: hbase-claim
+          {{- else if not .Values.persistence.enabled }}
+          emptyDir: {}
+          {{- end }}
