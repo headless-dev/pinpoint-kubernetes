@@ -34,11 +34,6 @@ spec:
             items:
               - key: hbase-site.xml
                 path: hbase-site.xml
-        {{- if .Values.persistence.enabled }}
-        - name: data
-          persistentVolumeClaim:
-            claimName: hbase-claim
-        {{- end }}
       containers:
       - name: pinpoint-hbase
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
