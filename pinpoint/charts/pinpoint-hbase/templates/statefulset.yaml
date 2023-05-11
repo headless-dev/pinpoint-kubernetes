@@ -121,7 +121,7 @@ spec:
           timeoutSeconds: 5
       {{- if .Values.persistence.enabled }}
         volumeMounts:
-          - name: datadir
+          - name: data
             mountPath: /var/lib/zookeeper
       {{- end }}
       securityContext:
