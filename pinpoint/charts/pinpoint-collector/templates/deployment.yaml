@@ -44,17 +44,21 @@ spec:
           - containerPort: 9996
             protocol: UDP
           livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - "nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}"
+            failureThreshold: 3
+            tcpSocket:
+              port: 9991
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
           readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - "nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}"
+            failureThreshold: 3
+            tcpSocket:
+              port: 9991
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
 {{- with .Values.affinity }}
