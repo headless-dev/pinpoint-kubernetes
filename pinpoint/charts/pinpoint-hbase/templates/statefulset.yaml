@@ -15,7 +15,7 @@ spec:
       app.kubernetes.io/component: master
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
   serviceName: {{ include "hbase.fullname" . }}
-  replicas: {{ .Values.hbase.master.replicas }}
+  replicas: 1
   template:
     metadata:
       labels:
@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: hbase-config
           configMap:
-            name: {{ include "hbase.fullname" . }}-cm
+            name: {{ include "hbase.fullname" . }}
             items:
               - key: hbase-site.xml
                 path: hbase-site.xml
@@ -39,18 +39,18 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         resources:
-{{ toYaml .Values.hbase.master.resources | indent 10 }}
+{{ toYaml .Values.hbase.resources | indent 10 }}
         readinessProbe:
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 600
+          initialDelaySeconds: 60
           timeoutSeconds: 2
         livenessProbe:
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 600
+          initialDelaySeconds: 60
           timeoutSeconds: 2
         volumeMounts:
           - name: hbase-config
@@ -81,7 +81,7 @@ spec:
           - sh
           - -c
           - "start-zookeeper \
-      --servers={{ .Values.hbase.master.replicas }} \
+      --servers=1 \
       --data_dir=/var/lib/zookeeper/data \
       --data_log_dir=/var/lib/zookeeper/data/log \
       --conf_dir=/opt/zookeeper/conf \
