@@ -62,9 +62,6 @@ spec:
           - name: data
             mountPath: /home/pinpoint/zookeeper
           {{- end }}
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
