@@ -48,13 +48,13 @@ spec:
               command:
                 - sh
                 - -c
-                - "until nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}; do echo waiting for zookeeper; sleep 2; done"
+                - "until nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}"
           readinessProbe:
             exec:
               command:
                 - sh
                 - -c
-                - "until nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}; do echo waiting for zookeeper; sleep 2; done"
+                - "until nslookup {{ include "pinpoint-collector.zookeeper.fullname" . }}-0.{{ include "pinpoint-collector.zookeeper.fullname" . }}"
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
 {{- with .Values.affinity }}
