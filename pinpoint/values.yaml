@@ -117,3 +117,4 @@ pinpoint-server:
   persistence:
     enabled: true
     size: 8Gi
+  storageClass: ""
