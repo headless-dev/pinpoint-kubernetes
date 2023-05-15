@@ -20,7 +20,7 @@ spec:
   - name: flink-task-2
     port: 6122
     targetPort: 6122
-  - name: flink-task-cluster
+  - name: flink-task-clus
     port: 19994
     targetPort: 19994
   selector:

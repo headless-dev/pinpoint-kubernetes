@@ -57,7 +57,7 @@ spec:
               containerPort: 6121
             - name: flink-task-2
               containerPort: 6122
-            - name: flink-task-cluster
+            - name: flink-task-clus
               containerPort: 19994
           env:
             - name: JOB_MANAGER_RPC_ADDRESS
