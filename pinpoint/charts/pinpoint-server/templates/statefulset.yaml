@@ -65,60 +65,101 @@ spec:
               mountPath: /home/pinpoint/zookeeper
             {{- end }}
 
-      - name: pinpoint-zookeeper
-        imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
-        image: "{{ .Values.zookeeper.image.repository }}:{{ .Values.zookeeper.image.tag }}"
-        resources:
-  {{ toYaml .Values.zookeeper.resources | indent 10 }}
-        ports:
-          - containerPort: 2181
-            name: client
-          - containerPort: 2888
-            name: server
-          - containerPort: 3888
-            name: leader-election
-        command:
-          - sh
-          - -c
-          - "start-zookeeper \
-      --servers=1 \
-      --data_dir=/var/lib/zookeeper/data \
-      --data_log_dir=/var/lib/zookeeper/data/log \
-      --conf_dir=/opt/zookeeper/conf \
-      --client_port=2181 \
-      --election_port=3888 \
-      --server_port=2888 \
-      --tick_time=2000 \
-      --init_limit=10 \
-      --sync_limit=5 \
-      --heap=512M \
-      --max_client_cnxns=60 \
-      --snap_retain_count=3 \
-      --purge_interval=12 \
-      --max_session_timeout=40000 \
-      --min_session_timeout=4000 \
-      --log_level=INFO"
-        readinessProbe:
-          exec:
-            command:
-              - sh
-              - -c
-              - "zookeeper-ready 2181"
-          initialDelaySeconds: 10
-          timeoutSeconds: 5
-        livenessProbe:
-          exec:
-            command:
-              - sh
-              - -c
-              - "zookeeper-ready 2181"
-          initialDelaySeconds: 10
-          timeoutSeconds: 5
-      {{- if .Values.persistence.enabled }}
-        volumeMounts:
-          - name: data
-            mountPath: /var/lib/zookeeper
-      {{- end }}
+        - name: pinpoint-collector
+          image: "{{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
+          resources:
+  {{- toYaml .Values.collector.resources | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "collector.fullname" .}}
+          ports:
+            - containerPort: 9991
+              name: grpc-agent
+            - containerPort: 9992
+              name: grpc-stat
+            - containerPort: 9993
+              name: grpc-span
+            - containerPort: 9994
+              name: thrift-base
+            - containerPort: 9995
+              name: thrift-stat
+              protocol: UDP
+            - containerPort: 9996
+              name: thrift-span
+              protocol: UDP
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9991
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9991
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+
+        - name: pinpoint-zookeeper
+          imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
+          image: "{{ .Values.zookeeper.image.repository }}:{{ .Values.zookeeper.image.tag }}"
+          resources:
+    {{ toYaml .Values.zookeeper.resources | indent 10 }}
+          ports:
+            - containerPort: 2181
+              name: client
+            - containerPort: 2888
+              name: server
+            - containerPort: 3888
+              name: leader-election
+          command:
+            - sh
+            - -c
+            - "start-zookeeper \
+        --servers=1 \
+        --data_dir=/var/lib/zookeeper/data \
+        --data_log_dir=/var/lib/zookeeper/data/log \
+        --conf_dir=/opt/zookeeper/conf \
+        --client_port=2181 \
+        --election_port=3888 \
+        --server_port=2888 \
+        --tick_time=2000 \
+        --init_limit=10 \
+        --sync_limit=5 \
+        --heap=512M \
+        --max_client_cnxns=60 \
+        --snap_retain_count=3 \
+        --purge_interval=12 \
+        --max_session_timeout=40000 \
+        --min_session_timeout=4000 \
+        --log_level=INFO"
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "zookeeper-ready 2181"
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "zookeeper-ready 2181"
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+        {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/zookeeper
+        {{- end }}
+
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
