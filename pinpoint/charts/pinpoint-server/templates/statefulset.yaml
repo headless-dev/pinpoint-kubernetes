@@ -117,7 +117,6 @@ spec:
               name: server
             - containerPort: 3888
               name: leader-election
-
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
