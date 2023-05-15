@@ -52,7 +52,7 @@ spec:
               value: "jobmanager"
           volumeMounts:
             - name: docker-bin
-              mountPath: docker-bin/docker-entrypoint.sh
+              mountPath: /docker-bin/docker-entrypoint.sh
               subPath: docker-entrypoint.sh
 
         - name: pinpoint-taskmanager
@@ -77,5 +77,5 @@ spec:
               value: "jobmanager"
           volumeMounts:
             - name: docker-bin
-              mountPath: docker-bin/docker-entrypoint.sh
+              mountPath: /docker-bin/docker-entrypoint.sh
               subPath: docker-entrypoint.sh
