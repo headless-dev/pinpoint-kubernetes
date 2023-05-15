@@ -31,11 +31,6 @@ spec:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - standalone-job
-            - -p
-            - "1"
-            - "pinpoint-flink-job.jar -spring.profiles.active release"
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
           ports:
@@ -48,8 +43,6 @@ spec:
         - name: pinpoint-taskmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - taskmanager
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
           ports:
