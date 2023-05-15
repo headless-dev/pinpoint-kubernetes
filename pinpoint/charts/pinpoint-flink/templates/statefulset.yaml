@@ -38,7 +38,7 @@ spec:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
+          args:
             - standalone-job
             - -p
             - "1"
@@ -59,7 +59,7 @@ spec:
         - name: pinpoint-taskmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
+          args:
             - taskmanager
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
