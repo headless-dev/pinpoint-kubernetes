@@ -1,0 +1,16 @@
+image:
+  repository: pinpointdocker/pinpoint-batch
+  tag: 2.5.1
+  pullPolicy: IfNotPresent
+serverPort: 8081
+affinity: {}
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "250m"
+
+zookeeper:
+  host:

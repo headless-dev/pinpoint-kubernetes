@@ -40,3 +40,5 @@ mysql:
   database: pinpoint
 zookeeper:
   host:
+flink:
+  host:

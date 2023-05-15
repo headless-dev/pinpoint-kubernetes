@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "flink.fullname" . }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+  labels:
+    app.kubernetes.io/name: {{ include "flink.name" . }}
+    app.kubernetes.io/component: pinpoint-server
+    {{- include "flink.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "flink.name" . }}
+      app.kubernetes.io/component: pinpoint-server
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  serviceName: {{ include "flink.fullname" . }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "flink.name" . }}
+        app.kubernetes.io/component: pinpoint-server
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    spec:
+{{- with .Values.affinity }}
+      affinity:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+      containers:
+        - name: pinpoint-jobmanager
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - standalone-job
+            - -p
+            - "1"
+            - "pinpoint-flink-job.jar -spring.profiles.active release"
+          resources:
+{{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - name: flink-job
+              containerPort: {{ .Values.serverPort}}
+          env:
+            - name: JOB_MANAGER_RPC_ADDRESS
+              value: "jobmanager"
+
+        - name: pinpoint-taskmanager
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - taskmanager
+          resources:
+{{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - name: flink-task-1
+              containerPort: 6121
+            - name: flink-task-2
+              containerPort: 6122
+            - name: flink-task-cluster
+              containerPort: 19994
+          env:
+            - name: JOB_MANAGER_RPC_ADDRESS
+              value: "jobmanager"

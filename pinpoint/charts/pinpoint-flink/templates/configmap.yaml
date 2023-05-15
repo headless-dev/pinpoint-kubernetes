@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "flink.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "flink.name" . }}
+    {{- include "flink.labels" . | nindent 4 }}
+data:
+  JOB_MANAGER_RPC_ADDRESS: "jobmanager"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "batch.zookeeper.fullname" . }}-0.{{ include "batch.zookeeper.fullname" . }}"
