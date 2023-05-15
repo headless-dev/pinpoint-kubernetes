@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: {{ include "flink.name" . }}
     {{- include "flink.labels" . | nindent 4 }}
 data:
-  JOB_MANAGER_RPC_ADDRESS: {{ include "flink.fullname" . }}
+  JOB_MANAGER_RPC_ADDRESS: "{{ include "flink.fullname" . }}-0.{{ include "flink.fullname" . }}"
   PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "batch.zookeeper.fullname" . }}-0.{{ include "batch.zookeeper.fullname" . }}"
   FLINK_WEB_PORT: "{{ .Values.serverPort}}"
   docker-entrypoint.sh: |
