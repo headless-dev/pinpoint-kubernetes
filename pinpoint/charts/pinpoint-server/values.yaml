@@ -45,6 +45,15 @@ collector:
     limits:
       memory: "512Mi"
       cpu: "250m"
+  receiver:
+    grpc:
+      agentPort: 9991
+      statPort: 9992
+      spanPort: 9993
+    thrift:
+      basePort: 9994
+      statPort: 9995
+      spanPort: 9996
 
 persistence:
   enabled: true
