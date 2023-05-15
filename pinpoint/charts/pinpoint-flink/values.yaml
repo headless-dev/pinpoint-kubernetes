@@ -1,5 +1,5 @@
 image:
-  repository: pinpointdocker/pinpoint-flink-flink
+  repository: pinpointdocker/pinpoint-flink
   tag: dev
   pullPolicy: IfNotPresent
 serverPort: 8081
