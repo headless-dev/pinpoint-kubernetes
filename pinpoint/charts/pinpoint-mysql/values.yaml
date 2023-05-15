@@ -1,0 +1,22 @@
+replicaCount: 1
+
+podAnnotations:
+
+image:
+  repository: pinpointdocker/pinpoint-mysql
+  tag: 2.5.1
+  pullPolicy: IfNotPresent
+
+rootPassword: root123
+user: admin
+password: admin
+database: pinpoint
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "100m"
+
+affinity: {}
+
+tolerations:

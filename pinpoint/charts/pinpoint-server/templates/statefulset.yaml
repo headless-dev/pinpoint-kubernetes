@@ -192,31 +192,6 @@ spec:
               mountPath: /var/lib/zookeeper
               {{- end }}
 
-        - name: pinpoint-mysql
-          image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
-          envFrom:
-            - secretRef:
-                name: {{ include "server.fullname" .}}
-          livenessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 5
-          resources:
-{{- toYaml .Values.mysql.resources | nindent 12 }}
-
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
