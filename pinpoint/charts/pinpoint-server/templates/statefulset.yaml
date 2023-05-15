@@ -45,15 +45,17 @@ spec:
               path: /
               port: 16010
             initialDelaySeconds: 60
+            periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /
               port: 16010
             initialDelaySeconds: 60
+            periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
           volumeMounts:
             - name: hbase-config
               mountPath: /opt/hbase/hbase-1.2.6/conf/hbase-site.xml
@@ -89,21 +91,21 @@ spec:
               name: thrift-span
               protocol: UDP
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             tcpSocket:
               port: 9991
             initialDelaySeconds: 60
             periodSeconds: 10
             successThreshold: 1
-            timeoutSeconds: 2
+            timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             tcpSocket:
               port: 9991
             initialDelaySeconds: 60
             periodSeconds: 10
             successThreshold: 1
-            timeoutSeconds: 2
+            timeoutSeconds: 5
 
         - name: pinpoint-zookeeper
           imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
@@ -174,21 +176,21 @@ spec:
             - secretRef:
                 name: {{ template "server.fullname" . }}
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 10
             successThreshold: 1
-            timeoutSeconds: 2
+            timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 10
             successThreshold: 1
-            timeoutSeconds: 2
+            timeoutSeconds: 5
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
