@@ -65,7 +65,7 @@ spec:
 
       - name: pinpoint-zookeeper
         imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
-        image: {{ .Values.zookeeper.image.pullPolicy | quote }}
+        image: "{{ .Values.zookeeper.image.repository }}:{{ .Values.zookeeper.image.tag }}"
         resources:
 {{ toYaml .Values.zookeeper.resources | indent 10 }}
         ports:
