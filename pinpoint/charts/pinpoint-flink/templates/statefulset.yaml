@@ -34,10 +34,11 @@ spec:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["cp", "-r", "/docker-bin/docker-entrypoint.sh", "/opt/docker-entrypoint.sh"]
           command:
             - sh
             - -c
-            - docker-entrypoint.sh
+            - /opt/docker-entrypoint.sh
             - standalone-job
             - -p
             - "1"
@@ -58,10 +59,11 @@ spec:
         - name: pinpoint-taskmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["cp", "-r", "/docker-bin/docker-entrypoint.sh", "/opt/docker-entrypoint.sh"]
           command:
             - sh
             - -c
-            - docker-entrypoint.sh
+            - /opt/docker-entrypoint.sh
             - taskmanager
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
