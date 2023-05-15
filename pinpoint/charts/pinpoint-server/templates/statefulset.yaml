@@ -70,7 +70,7 @@ spec:
           imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ include "pinpoint-collector.fullname" .}}
+                name: {{ include "collector.fullname" .}}
           ports:
             - containerPort: 9991
               protocol: TCP
