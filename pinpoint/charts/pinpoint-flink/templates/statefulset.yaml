@@ -31,19 +31,10 @@ spec:
         - name: docker-bin
           configMap:
             name: {{ include "flink.fullname" . }}
+            defaultMode: 0777
             items:
               - key: docker-entrypoint.sh
                 path: docker-entrypoint.sh
-      initContainers:
-        - name: permission-entrypoint
-          image: alpine:3.16.0
-          command:
-            - sh
-            - -c
-            - (chmod 777 /docker-bin/docker-entrypoint.sh)
-          volumeMounts:
-            - name: docker-bin
-              mountPath: /docker-bin
       containers:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
