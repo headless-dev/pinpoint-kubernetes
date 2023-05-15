@@ -65,46 +65,6 @@ spec:
               mountPath: /home/pinpoint/zookeeper
             {{- end }}
 
-        - name: pinpoint-collector
-          image: "{{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
-          resources:
-  {{- toYaml .Values.collector.resources | nindent 12 }}
-          envFrom:
-            - configMapRef:
-                name: {{ include "collector.fullname" .}}
-          ports:
-            - containerPort: 9991
-              name: grpc-agent
-            - containerPort: 9992
-              name: grpc-stat
-            - containerPort: 9993
-              name: grpc-span
-            - containerPort: 9994
-              name: thrift-base
-            - containerPort: 9995
-              name: thrift-stat
-              protocol: UDP
-            - containerPort: 9996
-              name: thrift-span
-              protocol: UDP
-          livenessProbe:
-            failureThreshold: 3
-            tcpSocket:
-              port: 9991
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 2
-          readinessProbe:
-            failureThreshold: 3
-            tcpSocket:
-              port: 9991
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 2
-
       - name: pinpoint-zookeeper
         imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
         image: "{{ .Values.zookeeper.image.repository }}:{{ .Values.zookeeper.image.tag }}"
