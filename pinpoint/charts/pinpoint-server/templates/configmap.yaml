@@ -21,7 +21,7 @@ data:
   BATCH_SERVER_IP: "{{ .Values.web.batch.server }}"
   BATCH_FILNK_SERVER: "{{ .Values.web.batch.flink }}"
   JDBC_DRIVERCLASSNAME: "com.mysql.jdbc.Driver"
-  JDBC_URL: "{{ include "web.mysql.url" .}}"
+  JDBC_URL: "{{ include "mysql.url" .}}"
   ALARM_MAIL_SERVER_URL: "{{ .Values.web.mail.server.url }}"
   ALARM_MAIL_SERVER_PORT: "{{ .Values.web.mail.server.port }}"
   ALARM_MAIL_SENDER_ADDRESS: "{{ .Values.web.mail.sender }}"

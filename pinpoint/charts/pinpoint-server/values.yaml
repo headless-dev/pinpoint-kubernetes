@@ -80,13 +80,6 @@ web:
   sendUsage: false
   loggingLevelRoot: INFO
   showApplicationStat: true
-  mysql:
-    serviceName:
-    host:
-    port: 3306
-    user: admin
-    password: admin
-    database: pinpoint
 
   batch:
     enable: false
@@ -108,6 +101,25 @@ web:
       startTls:
         enable: false
         required: false
+mysql:
+  image:
+    repository: pinpointdocker/pinpoint-mysql
+    tag: 2.5.1
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "250m"
+  rootPassword: root123
+  serviceName:
+  host:
+  port: 3306
+  user: admin
+  password: admin
+  database: pinpoint
 
 persistence:
   enabled: true

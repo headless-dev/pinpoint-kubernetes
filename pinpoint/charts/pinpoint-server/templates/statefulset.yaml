@@ -191,6 +191,14 @@ spec:
             - name: data
               mountPath: /var/lib/zookeeper
               {{- end }}
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ include "server.fullname" .}}
+          resources:
+{{- toYaml .Values.mysql.resources | nindent 12 }}
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
