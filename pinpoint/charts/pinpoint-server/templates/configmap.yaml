@@ -14,7 +14,7 @@ data:
   FLINK_CLUSTER_ENABLE: "{{ .Values.collector.flink.enable }}"
   FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}"
   SPRING_PROFILES_ACTIVE: "{{ .Values.profiles }}"
-  SERVER_PORT: "{{ .Values.web.serverPort }}"
+  WEB_SERVER_PORT: "{{ .Values.web.serverPort }}"
   CONFIG_SENDUSAGE: "{{ .Values.web.sendUsage }}"
   CONFIG_SHOW_APPLICATIONSTAT: "{{ .Values.web.showApplicationStat }}"
   BATCH_ENABLE: "{{ .Values.web.batch.enable }}"
