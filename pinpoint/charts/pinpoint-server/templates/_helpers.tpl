@@ -43,9 +43,13 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- end -}}
 {{- end -}}
 
+{{- define "web.mysql.fullname" -}}
+{{- $name := default "pinpoint-mysql" .Values.web.mysql.serviceName -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 
 {{- define "web.mysql.url" -}}
-{{- $host :=  default (include "pinpoint-web.mysql.fullname" .) .Values.mysql.host }}
-{{- $port :=  default 3306 .Values.mysql.port | int }}
+{{- $host :=  default (include "pinpoint-web.mysql.fullname" .) .Values.web.mysql.host }}
+{{- $port :=  default 3306 .Values.web.mysql.port | int }}
 {{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port (include "pinpoint-web.mysql.database" .) }}
 {{- end }}
