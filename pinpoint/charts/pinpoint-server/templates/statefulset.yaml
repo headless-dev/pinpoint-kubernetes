@@ -158,7 +158,7 @@ spec:
             - name: data
               mountPath: /var/lib/zookeeper
               {{- end }}
-        - name: {{ .Chart.Name }}
+        - name: pinpoint-web
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
           ports:
