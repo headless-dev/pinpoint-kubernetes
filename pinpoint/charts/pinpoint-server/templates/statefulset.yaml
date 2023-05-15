@@ -216,7 +216,6 @@ spec:
             timeoutSeconds: 5
           resources:
 {{- toYaml .Values.mysql.resources | nindent 12 }}
-              {{- if .Values.persistence.enabled }}
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
