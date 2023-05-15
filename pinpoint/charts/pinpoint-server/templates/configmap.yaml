@@ -8,8 +8,8 @@ metadata:
 data:
   CLUSTER_ENABLE: "{{ .Values.collector.clusterEnable }}"
   PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}"
-  SPRING_PROFILES: "{{ .Values.collector.profiles }}"
-  JAVA_OPTS: "-Dspring.profiles.active={{ .Values.collector.profiles }}"
+  SPRING_PROFILES: "{{ .Values.profiles }}"
+  JAVA_OPTS: "-Dspring.profiles.active={{ .Values.profiles }}"
   LOGGING_LEVEL_ROOT: "{{ .Values.collector.loggingLevelRoot }}"
   FLINK_CLUSTER_ENABLE: "{{ .Values.collector.flink.enable }}"
   FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}"
