@@ -29,16 +29,16 @@ spec:
 {{- end }}
       volumes:
         - name: docker-bin
-          emptyDir: {}
+          configMap:
+            name: {{ include "flink.fullname" . }}
+            items:
+              - key: docker-entrypoint.sh
+                path: docker-entrypoint.sh
       containers:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["cp", "-r", "/docker-bin/docker-entrypoint.sh", "/opt/docker-entrypoint.sh"]
           command:
-            - sh
-            - -c
-            - /opt/docker-entrypoint.sh
             - standalone-job
             - -p
             - "1"
@@ -59,11 +59,7 @@ spec:
         - name: pinpoint-taskmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["cp", "-r", "/docker-bin/docker-entrypoint.sh", "/opt/docker-entrypoint.sh"]
           command:
-            - sh
-            - -c
-            - /opt/docker-entrypoint.sh
             - taskmanager
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
