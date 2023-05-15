@@ -49,9 +49,9 @@ spec:
           ports:
             - name: flink-job
               containerPort: {{ .Values.serverPort}}
-          env:
-            - name: JOB_MANAGER_RPC_ADDRESS
-              value: {{ include "flink.fullname" . }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "flink.fullname" .}}
           volumeMounts:
             - name: docker-bin
               mountPath: /docker-bin/docker-entrypoint.sh
@@ -71,9 +71,9 @@ spec:
               containerPort: 6122
             - name: flink-task-clus
               containerPort: 19994
-          env:
-            - name: JOB_MANAGER_RPC_ADDRESS
-              value: {{ include "flink.fullname" . }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "flink.fullname" .}}
           volumeMounts:
             - name: docker-bin
               mountPath: /docker-bin/docker-entrypoint.sh
