@@ -47,6 +47,9 @@ spec:
   - port: {{ .Values.collector.receiver.thrift.spanPort}}
     targetPort: 9996
     name: thrift-span
+  - name: ui
+    port: {{ .Values.web.serverPort}}
+    targetPort: 8080
   selector:
     app.kubernetes.io/name: {{ include "server.name" . }}
     app.kubernetes.io/component: master

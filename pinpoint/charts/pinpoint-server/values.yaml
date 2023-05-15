@@ -5,6 +5,8 @@
 # See this repo for image build details: https://github.com/Comcast/kube-yarn/tree/master/image
 
 
+profiles: release
+
 affinity: {}
 
 zookeeper:
@@ -14,7 +16,7 @@ zookeeper:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "128Mi"
+      memory: "256Mi"
       cpu: "100m"
     limits:
       memory: "256Mi"
@@ -54,11 +56,58 @@ collector:
       basePort: 9994
       statPort: 9995
       spanPort: 9996
-  profiles: release
   loggingLevelRoot: INFO
   clusterEnable: true
   flink:
     enable: false
+
+web:
+  image:
+    repository: pinpointdocker/pinpoint-web
+    tag: 2.5.1
+    pullPolicy: IfNotPresent
+  serverPort: 8080
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "250m"
+  clusterEnable: true
+
+  adminPassword: admin
+  sendUsage: false
+  loggingLevelRoot: INFO
+  showApplicationStat: true
+  mysql:
+    serviceName:
+    host:
+    port:
+    user:
+    password:
+    database:
+
+  batch:
+    enable: false
+    server: 127.0.0.1
+    flink: 127.0.0.1
+
+  mail:
+    server:
+      url: smtp.gmail.com
+      port: 587
+      username: username
+      password: password
+    sender: pinpoint_operator@pinpoint.com
+    transportProtocol: smtp
+    debug: false
+    smtp:
+      port: 25
+      auth: false
+      startTls:
+        enable: false
+        required: false
 
 persistence:
   enabled: true
