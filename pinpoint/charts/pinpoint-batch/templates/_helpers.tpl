@@ -38,9 +38,13 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "batch.mysql.fullname" -}}
+{{- $name := default "pinpoint-mysql" .Values.mysql.serviceName -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 
 {{- define "batch.mysql.url" -}}
-{{- $host :=  default "pinpoint-mysql" .Values.mysql.serviceName }}
+{{- $host :=  default (include "batch.mysql.fullname" .) .Values.mysql.host }}
 {{- $port :=  default 3306 .Values.mysql.port | int }}
 {{- $database :=  default "pinpoint" .Values.mysql.database }}
 {{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port $database }}
