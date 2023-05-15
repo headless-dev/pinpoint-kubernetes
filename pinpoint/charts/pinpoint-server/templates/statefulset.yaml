@@ -40,17 +40,19 @@ spec:
         imagePullPolicy: {{ .Values.hbase.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.hbase.resources | indent 10 }}
+        startupProbe:
+          initialDelaySeconds: 30
         readinessProbe:
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           timeoutSeconds: 2
         livenessProbe:
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           timeoutSeconds: 2
         volumeMounts:
           - name: hbase-config
