@@ -75,16 +75,18 @@ spec:
                 name: {{ include "collector.fullname" .}}
           ports:
             - containerPort: 9991
-              protocol: TCP
+              name: grpc-agent
             - containerPort: 9992
-              protocol: TCP
+              name: grpc-stat
             - containerPort: 9993
-              protocol: TCP
+              name: grpc-span
             - containerPort: 9994
-              protocol: TCP
+              name: thrift-base
             - containerPort: 9995
+              name: thrift-stat
               protocol: UDP
             - containerPort: 9996
+              name: thrift-span
               protocol: UDP
           livenessProbe:
             failureThreshold: 3
