@@ -34,9 +34,6 @@ spec:
             items:
               - key: docker-entrypoint.sh
                 path: docker-entrypoint.sh
-      securityContext:
-        runAsUser: 1001
-        runAsGroup: 1001
       containers:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

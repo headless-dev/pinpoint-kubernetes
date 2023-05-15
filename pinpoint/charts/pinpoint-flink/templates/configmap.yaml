@@ -9,7 +9,7 @@ data:
   JOB_MANAGER_RPC_ADDRESS: "jobmanager"
   PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "batch.zookeeper.fullname" . }}-0.{{ include "batch.zookeeper.fullname" . }}"
   docker-entrypoint.sh: |
-    #!/bin/bash
+    #!/bin/sh
 
     # In flink version < 1.11 we can't use "job cluster" because it's not yet available
     if [ "$1" = "standalone-job" ]; then
