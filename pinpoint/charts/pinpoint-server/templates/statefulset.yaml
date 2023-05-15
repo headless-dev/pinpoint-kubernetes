@@ -217,10 +217,6 @@ spec:
           resources:
 {{- toYaml .Values.mysql.resources | nindent 12 }}
               {{- if .Values.persistence.enabled }}
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/mysql
-              {{- end }}
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
