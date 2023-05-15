@@ -54,6 +54,11 @@ collector:
       basePort: 9994
       statPort: 9995
       spanPort: 9996
+  profiles: release
+  loggingLevelRoot: INFO
+  clusterEnable: true
+  flink:
+    enable: false
 
 persistence:
   enabled: true

@@ -6,6 +6,13 @@ metadata:
     app.kubernetes.io/name: {{ include "server.name" . }}
     {{- include "server.labels" . | nindent 4 }}
 data:
+  CLUSTER_ENABLE: "{{ .Values.collector.clusterEnable }}"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}"
+  SPRING_PROFILES: "{{ .Values.collector.profiles }}"
+  JAVA_OPTS: "-Dspring.profiles.active={{ .Values.collector.profiles }}"
+  LOGGING_LEVEL_ROOT: "{{ .Values.collector.loggingLevelRoot }}"
+  FLINK_CLUSTER_ENABLE: "{{ .Values.collector.flink.enable }}"
+  FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}"
   hbase-site.xml: |
     <?xml version="1.0"?>
     <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
