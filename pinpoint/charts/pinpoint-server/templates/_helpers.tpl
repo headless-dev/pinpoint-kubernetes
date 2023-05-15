@@ -49,7 +49,8 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- end -}}
 
 {{- define "web.mysql.url" -}}
-{{- $host :=  default (include "pinpoint-web.mysql.fullname" .) .Values.web.mysql.host }}
+{{- $host :=  default (include "web.mysql.fullname" .) .Values.web.mysql.host }}
 {{- $port :=  default 3306 .Values.web.mysql.port | int }}
-{{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port (include "pinpoint-web.mysql.database" .) }}
+{{- $database :=  default "pinpoint" .Values.web.mysql.database }}
+{{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port $database }}
 {{- end }}
