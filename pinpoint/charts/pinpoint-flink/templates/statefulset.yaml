@@ -43,7 +43,7 @@ spec:
             - (chmod 777 /docker-bin/docker-entrypoint.sh)
           volumeMounts:
             - name: docker-bin
-              mountPath: /docker-bin/docker-entrypoint.sh
+              mountPath: /docker-bin
       containers:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
