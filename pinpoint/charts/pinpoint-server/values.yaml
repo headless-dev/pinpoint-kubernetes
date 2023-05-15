@@ -82,7 +82,6 @@ web:
   showApplicationStat: true
   mysql:
     serviceName:
-    host:
     port: 3306
     user: admin
     password: admin
