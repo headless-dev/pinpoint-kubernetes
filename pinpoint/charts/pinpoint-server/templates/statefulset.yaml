@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: hbase-config
           configMap:
-            name: {{ include "server.name" . }}
+            name: {{ include "server.fullname" . }}
             items:
               - key: hbase-site.xml
                 path: hbase-site.xml
