@@ -1,6 +1,6 @@
 image:
   repository: pinpointdocker/pinpoint-flink
-  tag: dev
+  tag: 2.5.1
   pullPolicy: IfNotPresent
 serverPort: 8081
 affinity: {}
