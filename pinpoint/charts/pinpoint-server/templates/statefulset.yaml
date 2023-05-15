@@ -35,6 +35,36 @@ spec:
               - key: hbase-site.xml
                 path: hbase-site.xml
       containers:
+        - name: pinpoint-web
+          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
+          resources:
+{{- toYaml .Values.web.resources | nindent 12 }}
+          ports:
+            - name: ui
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: {{ template "server.fullname" . }}
+            - secretRef:
+                name: {{ template "server.fullname" . }}
+          livenessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+
         - name: pinpoint-hbase
           image: "{{ .Values.hbase.image.repository }}:{{ .Values.hbase.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.hbase.image.pullPolicy | quote }}
@@ -107,36 +137,6 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
 
-        - name: pinpoint-web
-          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
-          resources:
-{{- toYaml .Values.web.resources | nindent 12 }}
-          ports:
-            - name: ui
-              containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: {{ template "server.fullname" . }}
-            - secretRef:
-                name: {{ template "server.fullname" . }}
-          livenessProbe:
-            failureThreshold: 10
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 90
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 10
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 90
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
-
         - name: pinpoint-zookeeper
           imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
           image: "{{ .Values.zookeeper.image.repository }}:{{ .Values.zookeeper.image.tag }}"
@@ -191,6 +191,7 @@ spec:
             - name: data
               mountPath: /var/lib/zookeeper
               {{- end }}
+
         - name: pinpoint-mysql
           image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
