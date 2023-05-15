@@ -24,7 +24,7 @@ pinpoint-collector:
   zookeeper:
     hostName:
 
-pinpoint-zookeeper-hbase:
+pinpoint-server:
   affinity: {}
 
   zookeeper:

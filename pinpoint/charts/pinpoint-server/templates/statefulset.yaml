@@ -36,8 +36,8 @@ spec:
                 path: hbase-site.xml
       containers:
       - name: pinpoint-hbase
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        image: "{{ .Values.hbase.image.repository }}:{{ .Values.hbase.image.tag }}"
+        imagePullPolicy: {{ .Values.hbase.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.hbase.resources | indent 10 }}
         readinessProbe:
@@ -64,8 +64,8 @@ spec:
           {{- end }}
 
       - name: pinpoint-zookeeper
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        image: registry.k8s.io/kubernetes-zookeeper:1.0-3.4.10
+        imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
+        image: {{ .Values.zookeeper.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.zookeeper.resources | indent 10 }}
         ports:
