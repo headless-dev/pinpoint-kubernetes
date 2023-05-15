@@ -27,6 +27,9 @@ spec:
       affinity:
 {{- toYaml . | nindent 8 }}
 {{- end }}
+      volumes:
+        - name: docker-bin
+          emptyDir: {}
       containers:
         - name: pinpoint-jobmanager
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
