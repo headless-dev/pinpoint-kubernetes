@@ -7,19 +7,6 @@
 
 affinity: {}
 
-hbase:
-  image:
-    repository: pinpointdocker/pinpoint-hbase
-    tag: 2.5.1
-    pullPolicy: IfNotPresent
-  resources:
-    requests:
-      memory: "4Gi"
-      cpu: "1"
-    limits:
-      memory: "4Gi"
-      cpu: "1"
-
 zookeeper:
   image:
     repository: registry.k8s.io/kubernetes-zookeeper
@@ -33,6 +20,32 @@ zookeeper:
       memory: "256Mi"
       cpu: "100m"
 
+hbase:
+  image:
+    repository: pinpointdocker/pinpoint-hbase
+    tag:
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "1"
+
+collector:
+  image:
+    repository: pinpointdocker/pinpoint-collector
+    tag:
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "250m"
+
 persistence:
   enabled: true
-  size: 2Gi
+  size: 8Gi
