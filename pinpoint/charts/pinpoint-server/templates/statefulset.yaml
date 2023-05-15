@@ -36,7 +36,7 @@ spec:
                 path: hbase-site.xml
       containers:
         - name: pinpoint-hbase
-          image: "{{ .Values.hbase.image.repository }}:{{ .Values.hbase.image.tag }}"
+          image: "{{ .Values.hbase.image.repository }}:{{ .Values.hbase.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.hbase.image.pullPolicy | quote }}
           resources:
   {{ toYaml .Values.hbase.resources | indent 10 }}
@@ -68,6 +68,8 @@ spec:
         - name: pinpoint-collector
           image: "{{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
+          resources:
+  {{- toYaml .Values.collector.resources | nindent 12 }}
           envFrom:
             - configMapRef:
                 name: {{ include "collector.fullname" .}}
@@ -100,8 +102,6 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 2
-          resources:
-  {{- toYaml .Values.collector.resources | nindent 12 }}
 
       - name: pinpoint-zookeeper
         imagePullPolicy: {{ .Values.zookeeper.image.pullPolicy }}
