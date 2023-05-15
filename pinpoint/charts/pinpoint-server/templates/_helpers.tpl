@@ -34,8 +34,8 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- end -}}
 
 {{- define "web.mysql.url" -}}
-{{- $host :=  default "pinpoint-mysql" .Values.mysql.serviceName }}
-{{- $port :=  default 3306 .Values.mysql.port | int }}
-{{- $database :=  default "pinpoint" .Values.mysql.database }}
+{{- $host :=  default "pinpoint-mysql" .Values.web.mysql.serviceName }}
+{{- $port :=  default 3306 .Values.web.mysql.port | int }}
+{{- $database :=  default "pinpoint" .Values.web.mysql.database }}
 {{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port $database }}
 {{- end }}
