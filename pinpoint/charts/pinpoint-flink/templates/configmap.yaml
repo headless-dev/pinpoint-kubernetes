@@ -8,6 +8,7 @@ metadata:
 data:
   JOB_MANAGER_RPC_ADDRESS: {{ include "flink.fullname" . }}
   PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "batch.zookeeper.fullname" . }}-0.{{ include "batch.zookeeper.fullname" . }}"
+  FLINK_WEB_PORT: {{ .Values.serverPort}}
   docker-entrypoint.sh: |
     #!/bin/bash
 
