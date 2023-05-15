@@ -1,6 +1,6 @@
 image:
-  repository: pinpointdocker/pinpoint-batch
-  tag: 2.5.1
+  repository: pinpointdocker/pinpoint-flink-flink
+  tag: dev
   pullPolicy: IfNotPresent
 serverPort: 8081
 affinity: {}
