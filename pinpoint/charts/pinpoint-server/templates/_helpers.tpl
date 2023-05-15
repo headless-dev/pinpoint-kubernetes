@@ -33,16 +33,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- end -}}
 
-
-{{- define "collector.fullname" -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-
 {{- define "web.mysql.fullname" -}}
 {{- $name := default "pinpoint-mysql" .Values.web.mysql.serviceName -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
