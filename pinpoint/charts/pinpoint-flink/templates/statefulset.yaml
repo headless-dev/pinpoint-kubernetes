@@ -51,7 +51,7 @@ spec:
               containerPort: {{ .Values.serverPort}}
           env:
             - name: JOB_MANAGER_RPC_ADDRESS
-              value: "jobmanager"
+              value: {{ include "flink.fullname" . }}
           volumeMounts:
             - name: docker-bin
               mountPath: /docker-bin/docker-entrypoint.sh
@@ -73,7 +73,7 @@ spec:
               containerPort: 19994
           env:
             - name: JOB_MANAGER_RPC_ADDRESS
-              value: "jobmanager"
+              value: {{ include "flink.fullname" . }}
           volumeMounts:
             - name: docker-bin
               mountPath: /docker-bin/docker-entrypoint.sh
