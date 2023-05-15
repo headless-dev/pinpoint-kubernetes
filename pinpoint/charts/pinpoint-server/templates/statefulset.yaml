@@ -41,21 +41,21 @@ spec:
           resources:
 {{ toYaml .Values.hbase.resources | indent 12 }}
           readinessProbe:
+            failureThreshold: 5
             httpGet:
               path: /
               port: 16010
             initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 5
           livenessProbe:
+            failureThreshold: 5
             httpGet:
               path: /
               port: 16010
             initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 5
           volumeMounts:
             - name: hbase-config
               mountPath: /opt/hbase/hbase-1.2.6/conf/hbase-site.xml
@@ -91,18 +91,48 @@ spec:
               name: thrift-span
               protocol: UDP
           livenessProbe:
-            failureThreshold: 5
+            failureThreshold: 10
             tcpSocket:
               port: 9991
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 5
+            failureThreshold: 10
             tcpSocket:
               port: 9991
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+
+        - name: pinpoint-web
+          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
+          resources:
+{{- toYaml .Values.web.resources | nindent 12 }}
+          ports:
+            - name: ui
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: {{ template "server.fullname" . }}
+            - secretRef:
+                name: {{ template "server.fullname" . }}
+          livenessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 90
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 5
@@ -161,36 +191,6 @@ spec:
             - name: data
               mountPath: /var/lib/zookeeper
               {{- end }}
-
-        - name: pinpoint-web
-          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
-          resources:
-{{- toYaml .Values.web.resources | nindent 12 }}
-          ports:
-            - name: ui
-              containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: {{ template "server.fullname" . }}
-            - secretRef:
-                name: {{ template "server.fullname" . }}
-          livenessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
