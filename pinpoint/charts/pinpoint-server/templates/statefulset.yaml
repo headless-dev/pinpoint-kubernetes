@@ -191,7 +191,7 @@ spec:
             - name: data
               mountPath: /var/lib/zookeeper
               {{- end }}
-        - name: {{ .Chart.Name }}
+        - name: pinpoint-mysql
           image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
           envFrom:
