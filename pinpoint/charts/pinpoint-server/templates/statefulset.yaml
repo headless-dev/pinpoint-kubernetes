@@ -197,6 +197,22 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ include "server.fullname" .}}
+          livenessProbe:
+            failureThreshold: 5
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 5
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
           resources:
 {{- toYaml .Values.mysql.resources | nindent 12 }}
 
