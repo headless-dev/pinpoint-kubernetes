@@ -34,6 +34,6 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- end -}}
 
 {{- define "flink.zookeeper.fullname" -}}
-{{- $name := default "pinpoint-server" .Values.zookeeper.host -}}
+{{- $name := default "pinpoint-zookeeper-hbase" .Values.zookeeper.host -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
