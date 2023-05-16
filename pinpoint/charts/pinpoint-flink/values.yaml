@@ -4,13 +4,7 @@ image:
   pullPolicy: IfNotPresent
 serverPort: 8081
 affinity: {}
-resources:
-  requests:
-    memory: "1Gi"
-    cpu: "1"
-  limits:
-    memory: "1Gi"
-    cpu: "1"
+resources: {}
 
 zookeeper:
   host:
