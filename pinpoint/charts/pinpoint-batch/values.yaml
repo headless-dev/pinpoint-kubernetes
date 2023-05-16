@@ -27,7 +27,7 @@ mail:
       enable: false
       required: false
 showApplicationStat: true
-sendUsage: sendUsage
+sendUsage: true
 profiles: release
 loggingLevelRoot: INFO
 clusterEnable: false
