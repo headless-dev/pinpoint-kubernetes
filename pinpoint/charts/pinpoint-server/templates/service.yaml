@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/component: pinpoint-server
     {{- include "server.labels" . | nindent 4 }}
 spec:
-  clusterIP: None
   publishNotReadyAddresses: true
   ports:
   - name: hbase-master
