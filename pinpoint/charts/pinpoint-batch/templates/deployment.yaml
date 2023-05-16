@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ include "batch.fullname" . }}
   annotations:
@@ -14,8 +14,6 @@ spec:
       app.kubernetes.io/name: {{ include "batch.name" . }}
       app.kubernetes.io/component: pinpoint-server
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
-  serviceName: {{ include "batch.fullname" . }}
-  replicas: 1
   template:
     metadata:
       labels:
