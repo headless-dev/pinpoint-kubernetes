@@ -6,6 +6,7 @@ metadata:
 {{ include "pinpoint-mysql.labels" . | indent 4 }}
   name: {{ include "pinpoint-mysql.fullname" . }}
 spec:
+  serviceName: {{ include "pinpoint-mysql.fullname" . }}-headless
   replicas: 1
   selector:
     matchLabels:

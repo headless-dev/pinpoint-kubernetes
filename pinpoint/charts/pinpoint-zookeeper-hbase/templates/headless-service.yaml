@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: {{ include "hbase.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "hbase.name" . }}
+    app.kubernetes.io/name: {{ include "hbase.name" . }}-headless
     app.kubernetes.io/component: master
     {{- include "hbase.labels" . | nindent 4 }}
 spec:
+  clusterIP: None
+  publishNotReadyAddresses: true
   ports:
   - name: hbase-master
     port: 60000
