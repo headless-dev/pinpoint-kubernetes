@@ -60,4 +60,12 @@ data:
           <name>hbase.regionserver.port</name>
           <value>60020</value>
         </property>
+        <property>
+        <name>zookeeper.clientCnxn.socket</name>
+        <value>org.apache.zookeeper.ClientCnxnSocketNetty</value>
+        </property>
+        <property>
+        <name>zookeeper.clientCnxn.socket.caching</name>
+        <value>false</value>
+        </property>
     </configuration>
