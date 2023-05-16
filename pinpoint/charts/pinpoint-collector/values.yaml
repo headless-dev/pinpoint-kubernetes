@@ -42,3 +42,5 @@ loggingLevelRoot: INFO
 clusterEnable: true
 zookeeper:
   hostName:
+flink:
+  enabled: true

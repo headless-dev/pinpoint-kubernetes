@@ -10,5 +10,5 @@ data:
   SPRING_PROFILES: "{{ .Values.profiles }}"
   JAVA_OPTS: "-Dspring.profiles.active={{ .Values.profiles }}"
   LOGGING_LEVEL_ROOT:  "{{ .Values.loggingLevelRoot }}"
-  FLINK_CLUSTER_ENABLE:  "true"
+  FLINK_CLUSTER_ENABLE:  "{{ .Values.flink.enabled }}"
   FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "pinpoint-collector.zookeeper.fullname" . }}"
