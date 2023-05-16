@@ -192,18 +192,6 @@ spec:
               mountPath: /var/lib/zookeeper
               {{- end }}
 
-        - name: pinpoint-batch
-          image: "{{ .Values.batch.image.repository }}:{{ .Values.batch.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.batch.image.pullPolicy }}
-          resources:
-{{- toYaml .Values.batch.resources | nindent 12 }}
-          ports:
-            - name: batch
-              containerPort: {{ .Values.batch.serverPort}}
-          envFrom:
-            - configMapRef:
-                name: {{ template "server.fullname" . }}
-
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:

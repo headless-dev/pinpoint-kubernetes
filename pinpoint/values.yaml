@@ -92,33 +92,6 @@ pinpoint-server:
       password: admin
       database: pinpoint
 
-  batch:
-    image:
-      repository: pinpointdocker/pinpoint-batch
-      tag: 2.5.1
-      pullPolicy: IfNotPresent
-    serverPort: 8079
-    affinity: { }
-    resources:
-      requests:
-        memory: "512Mi"
-        cpu: "250m"
-    showApplicationStat: true
-    sendUsage: true
-    profiles: release
-    loggingLevelRoot: INFO
-    clusterEnable: false
-    mysql:
-      serviceName:
-      host:
-      port: 3306
-      user: admin
-      password: admin
-      database: pinpoint
-    zookeeper:
-      host:
-    enabled: false
-
   persistence:
     enabled: true
     size: 8Gi
@@ -138,6 +111,34 @@ pinpoint-mysql:
       memory: "512Mi"
       cpu: "250m"
   affinity: {}
+
+
+pinpoint-batch:
+  image:
+    repository: pinpointdocker/pinpoint-batch
+    tag: 2.5.1
+    pullPolicy: IfNotPresent
+  serverPort: 8079
+  affinity: { }
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+  showApplicationStat: true
+  sendUsage: true
+  profiles: release
+  loggingLevelRoot: INFO
+  clusterEnable: false
+  mysql:
+    serviceName:
+    host:
+    port: 3306
+    user: admin
+    password: admin
+    database: pinpoint
+  zookeeper:
+    host:
+  enabled: false
 
 pinpoint-flink:
   image:
