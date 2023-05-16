@@ -9,8 +9,21 @@ pinpoint-server:
 
   affinity: {}
 
-  batch:
-    enabled: false
+  mail:
+    server:
+      url: smtp.gmail.com
+      port: 587
+      username: username
+      password: password
+    sender: pinpoint_operator@pinpoint.com
+    transportProtocol: smtp
+    debug: false
+    smtp:
+      port: 25
+      auth: false
+      startTls:
+        enable: false
+        required: false
 
   zookeeper:
     image:
@@ -19,9 +32,6 @@ pinpoint-server:
       pullPolicy: IfNotPresent
     resources:
       requests:
-        memory: "256Mi"
-        cpu: "100m"
-      limits:
         memory: "256Mi"
         cpu: "100m"
 
@@ -34,9 +44,6 @@ pinpoint-server:
       requests:
         memory: "4Gi"
         cpu: "1"
-      limits:
-        memory: "4Gi"
-        cpu: "1"
 
   collector:
     image:
@@ -45,9 +52,6 @@ pinpoint-server:
       pullPolicy: IfNotPresent
     resources:
       requests:
-        memory: "512Mi"
-        cpu: "250m"
-      limits:
         memory: "512Mi"
         cpu: "250m"
     receiver:
@@ -74,9 +78,6 @@ pinpoint-server:
       requests:
         memory: "512Mi"
         cpu: "250m"
-      limits:
-        memory: "512Mi"
-        cpu: "250m"
     clusterEnable: true
 
     adminPassword: admin
@@ -91,25 +92,37 @@ pinpoint-server:
       password: admin
       database: pinpoint
 
-    mail:
-      server:
-        url: smtp.gmail.com
-        port: 587
-        username: username
-        password: password
-      sender: pinpoint_operator@pinpoint.com
-      transportProtocol: smtp
-      debug: false
-      smtp:
-        port: 25
-        auth: false
-        startTls:
-          enable: false
-          required: false
+  batch:
+    image:
+      repository: pinpointdocker/pinpoint-batch
+      tag: 2.5.1
+      pullPolicy: IfNotPresent
+    serverPort: 8079
+    affinity: { }
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+    showApplicationStat: true
+    sendUsage: true
+    profiles: release
+    loggingLevelRoot: INFO
+    clusterEnable: false
+    mysql:
+      serviceName:
+      host:
+      port: 3306
+      user: admin
+      password: admin
+      database: pinpoint
+    zookeeper:
+      host:
+    enabled: false
 
   persistence:
     enabled: true
     size: 8Gi
+
 pinpoint-mysql:
   image:
     repository: pinpointdocker/pinpoint-mysql
@@ -124,9 +137,6 @@ pinpoint-mysql:
     requests:
       memory: "512Mi"
       cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "250m"
   affinity: {}
 
 pinpoint-flink:
@@ -138,49 +148,5 @@ pinpoint-flink:
   affinity: { }
   resources: {}
 
-  zookeeper:
-    host:
-
-pinpoint-batch:
-  image:
-    repository: pinpointdocker/pinpoint-batch
-    tag: 2.5.1
-    pullPolicy: IfNotPresent
-  serverPort: 8079
-  affinity: { }
-  resources:
-    requests:
-      memory: "512Mi"
-      cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "250m"
-  mail:
-    server:
-      url: smtp.gmail.com
-      port: 587
-      username: username
-      password: password
-    sender: pinpoint_operator@pinpoint.com
-    transportProtocol: smtp
-    debug: false
-    smtp:
-      port: 25
-      auth: false
-      startTls:
-        enable: false
-        required: false
-  showApplicationStat: true
-  sendUsage: true
-  profiles: release
-  loggingLevelRoot: INFO
-  clusterEnable: false
-  mysql:
-    serviceName:
-    host:
-    port: 3306
-    user: admin
-    password: admin
-    database: pinpoint
   zookeeper:
     host:

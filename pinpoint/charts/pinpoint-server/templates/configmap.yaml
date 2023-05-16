@@ -28,6 +28,7 @@ data:
   ALARM_MAIL_SMTP_STARTTLS_ENABLE: "{{ .Values.web.mail.smtp.startTls.enable }}"
   ALARM_MAIL_SMTP_STARTTLS_REQUIRED: "{{ .Values.web.mail.smtp.startTls.required }}"
   ALARM_MAIL_DEBUG: "{{ .Values.web.mail.debug }}"
+  BATCH_FLINK_SERVER: "{{ include "batch.flink.fullname" . }}"
   hbase-site.xml: |
     <?xml version="1.0"?>
     <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
