@@ -19,7 +19,6 @@ spec:
   template:
     metadata:
       labels:
-        rollme: {{ randAlphaNum 5 | quote }}
         app.kubernetes.io/name: {{ include "server.name" . }}
         app.kubernetes.io/component: pinpoint-server
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
