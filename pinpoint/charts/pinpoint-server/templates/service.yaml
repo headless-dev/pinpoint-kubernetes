@@ -8,6 +8,7 @@ metadata:
     {{- include "server.labels" . | nindent 4 }}
 spec:
   clusterIP: None
+  publishNotReadyAddresses: true
   ports:
   - name: hbase-master
     port: 60000
