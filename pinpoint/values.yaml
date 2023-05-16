@@ -131,6 +131,24 @@ pinpoint-mysql:
       cpu: "250m"
   affinity: {}
 
+pinpoint-flink:
+  image:
+    repository: pinpointdocker/pinpoint-flink
+    tag: 2.5.1
+    pullPolicy: IfNotPresent
+  serverPort: 8081
+  affinity: { }
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "250m"
+
+  zookeeper:
+    host:
+
 pinpoint-batch:
   image:
     repository: pinpointdocker/pinpoint-batch
@@ -161,7 +179,7 @@ pinpoint-batch:
         enable: false
         required: false
   showApplicationStat: true
-  sendUsage: sendUsage
+  sendUsage: true
   profiles: release
   loggingLevelRoot: INFO
   clusterEnable: false
