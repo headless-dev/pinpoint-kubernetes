@@ -40,6 +40,10 @@ hbase:
     repository: pinpointdocker/pinpoint-hbase
     tag:
     pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "1"
 
 collector:
   image:
