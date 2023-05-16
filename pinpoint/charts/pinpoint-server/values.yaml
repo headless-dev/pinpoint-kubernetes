@@ -75,7 +75,7 @@ collector:
   loggingLevelRoot: INFO
   clusterEnable: true
   flink:
-    enabled: false
+    enabled: true
 
 web:
   image:
