@@ -9,6 +9,9 @@ pinpoint-server:
 
   affinity: {}
 
+  batch:
+    enabled: false
+
   zookeeper:
     image:
       repository: registry.k8s.io/kubernetes-zookeeper
@@ -87,9 +90,6 @@ pinpoint-server:
       user: admin
       password: admin
       database: pinpoint
-
-    batch:
-      enabled: false
 
     mail:
       server:

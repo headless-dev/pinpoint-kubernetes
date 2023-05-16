@@ -9,6 +9,9 @@ profiles: release
 
 affinity: {}
 
+batch:
+  enabled: false
+
 zookeeper:
   image:
     repository: registry.k8s.io/kubernetes-zookeeper
@@ -88,8 +91,6 @@ web:
     password: admin
     database: pinpoint
 
-  batch:
-    enabled: false
 
   mail:
     server:

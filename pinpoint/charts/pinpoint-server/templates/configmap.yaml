@@ -17,7 +17,7 @@ data:
   WEB_SERVER_PORT: "{{ .Values.web.serverPort }}"
   CONFIG_SENDUSAGE: "{{ .Values.web.sendUsage }}"
   CONFIG_SHOW_APPLICATIONSTAT: "{{ .Values.web.showApplicationStat }}"
-  BATCH_ENABLE: "{{ .Values.web.batch.enabled }}"
+  BATCH_ENABLE: "{{ .Values.batch.enabled }}"
   BATCH_SERVER_IP: "{{ include "web.batch.fullname" . }}"
   BATCH_FILNK_SERVER: "{{ include "web.flink.fullname" . }}"
   JDBC_DRIVERCLASSNAME: "com.mysql.jdbc.Driver"
