@@ -7,7 +7,7 @@ metadata:
     {{- include "batch.labels" . | nindent 4 }}
 data:
   CLUSTER_ENABLE: "{{ .Values.clusterEnable }}"
-  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "batch.zookeeper.fullname" . }}-0.{{ include "server.fullname" . }}"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}"
   SPRING_PROFILES: "{{ .Values.profiles }}"
   BATCH_FLINK_SERVER: "{{ include "batch.flink.fullname" . }}"
   JAVA_OPTS: "-Dspring.profiles.active={{ .Values.profiles }}"
