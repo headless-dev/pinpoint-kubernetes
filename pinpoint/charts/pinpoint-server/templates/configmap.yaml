@@ -28,7 +28,6 @@ data:
   ALARM_MAIL_SMTP_STARTTLS_ENABLE: "{{ .Values.mail.smtp.startTls.enable }}"
   ALARM_MAIL_SMTP_STARTTLS_REQUIRED: "{{ .Values.mail.smtp.startTls.required }}"
   ALARM_MAIL_DEBUG: "{{ .Values.mail.debug }}"
-  BATCH_FLINK_SERVER: "{{ include "batch.flink.fullname" . }}"
   hbase-site.xml: |
     <?xml version="1.0"?>
     <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -47,7 +46,7 @@ data:
         </property>
         <property>
             <name>hbase.zookeeper.quorum</name>
-            <value>{{ include "server.fullname" . }}</value>
+            <value>{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}-0</value>
         </property>
         <property>
           <name>hbase.zookeeper.property.clientPort</name>
