@@ -54,7 +54,7 @@ spec:
             failureThreshold: 5
             tcpSocket:
               port: 6123
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 5
@@ -62,7 +62,7 @@ spec:
             failureThreshold: 5
             tcpSocket:
               port: 6123
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 5
