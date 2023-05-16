@@ -89,9 +89,7 @@ pinpoint-server:
       database: pinpoint
 
     batch:
-      enable: false
-      server: 127.0.0.1
-      flink: 127.0.0.1
+      enabled: false
 
     mail:
       server:

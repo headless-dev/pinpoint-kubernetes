@@ -44,3 +44,13 @@ app.kubernetes.io/part-of: {{ .Chart.Name }}
 {{- $database :=  default "pinpoint" .Values.web.mysql.database }}
 {{- printf "jdbc:mysql://%s:%d/%s?characterEncoding=UTF-8" $host $port $database }}
 {{- end }}
+
+{{- define "web.flink.fullname" -}}
+{{- $name := default "pinpoint-flink" -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "web.batch.fullname" -}}
+{{- $name := default "pinpoint-batch" -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
