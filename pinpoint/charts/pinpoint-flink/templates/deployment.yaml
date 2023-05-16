@@ -52,22 +52,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "flink.fullname" .}}
-          livenessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 6123
-            initialDelaySeconds: 60
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 5
-            tcpSocket:
-              port: 6123
-            initialDelaySeconds: 60
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 5
           volumeMounts:
             - name: docker-bin
               mountPath: /docker-bin/docker-entrypoint.sh
