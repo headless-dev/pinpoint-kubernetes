@@ -14,7 +14,7 @@ spec:
       app.kubernetes.io/name: {{ include "server.name" . }}
       app.kubernetes.io/component: pinpoint-server
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
-  serviceName: {{ include "server.fullname" . }}
+  serviceName: {{ include "server.fullname" . }}-headless
   replicas: 1
   template:
     metadata:
