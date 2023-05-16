@@ -13,6 +13,9 @@ spec:
   ports:
   - name: flink-job
     port: 6123
+    targetPort: 6123
+  - name: flink-web
+    port: 8081
     targetPort: {{ .Values.serverPort}}
   - name: flink-task-1
     port: 6121

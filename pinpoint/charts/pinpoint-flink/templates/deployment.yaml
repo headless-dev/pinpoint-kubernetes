@@ -46,6 +46,8 @@ spec:
 {{- toYaml .Values.resources | nindent 12 }}
           ports:
             - name: flink-job
+              containerPort: 6123
+            - name: flink-web
               containerPort: {{ .Values.serverPort}}
           envFrom:
             - configMapRef:
