@@ -46,7 +46,7 @@ data:
         </property>
         <property>
             <name>hbase.zookeeper.quorum</name>
-            <value>{{ include "server.fullname" . }}-0.{{ include "server.fullname" . }}</value>
+            <value>{{ include "server.fullname" . }}</value>
         </property>
         <property>
           <name>hbase.zookeeper.property.clientPort</name>
