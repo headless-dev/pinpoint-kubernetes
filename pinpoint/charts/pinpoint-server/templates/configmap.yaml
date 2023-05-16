@@ -7,12 +7,12 @@ metadata:
     {{- include "server.labels" . | nindent 4 }}
 data:
   CLUSTER_ENABLE: "{{ .Values.collector.clusterEnable }}"
-  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-headless"
   SPRING_PROFILES: "{{ .Values.profiles }}"
   JAVA_OPTS: "-Dspring.profiles.active={{ .Values.profiles }}"
   LOGGING_LEVEL_ROOT: "{{ .Values.collector.loggingLevelRoot }}"
   FLINK_CLUSTER_ENABLE: "{{ .Values.collector.flink.enabled }}"
-  FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}"
+  FLINK_CLUSTER_ZOOKEEPER_ADDRESS: "{{ include "server.fullname" . }}-headless"
   SPRING_PROFILES_ACTIVE: "{{ .Values.profiles }}"
   WEB_SERVER_PORT: "{{ .Values.web.serverPort }}"
   CONFIG_SENDUSAGE: "{{ .Values.web.sendUsage }}"

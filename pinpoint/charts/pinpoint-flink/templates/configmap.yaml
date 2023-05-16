@@ -7,7 +7,7 @@ metadata:
     {{- include "flink.labels" . | nindent 4 }}
 data:
   JOB_MANAGER_RPC_ADDRESS: "{{ include "flink.fullname" . }}"
-  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "flink.zookeeper.fullname" . }}"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "flink.zookeeper.fullname" . }}-headless"
   FLINK_WEB_PORT: "{{ .Values.serverPort}}"
   docker-entrypoint.sh: |
     #!/bin/bash
