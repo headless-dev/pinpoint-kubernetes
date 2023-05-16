@@ -22,6 +22,10 @@ spec:
     protocol: TCP
   - port: 2181
     name: client
+  - port: 2888
+    name: server
+  - port: 3888
+    name: leader-election
   - port: {{ .Values.collector.receiver.grpc.agentPort}}
     targetPort: 9991
     name: grpc-agent
