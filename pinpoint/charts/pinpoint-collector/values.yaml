@@ -40,5 +40,5 @@ receiver:
 profiles: release
 loggingLevelRoot: INFO
 clusterEnable: true
-flink:
-  enable: false
+zookeeper:
+  hostName:
