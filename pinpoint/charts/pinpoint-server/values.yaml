@@ -34,9 +34,6 @@ zookeeper:
     requests:
       memory: "256Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "100m"
 
 hbase:
   image:
@@ -47,9 +44,6 @@ hbase:
     requests:
       memory: "4Gi"
       cpu: "1"
-    limits:
-      memory: "4Gi"
-      cpu: "1"
 
 collector:
   image:
@@ -58,9 +52,6 @@ collector:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "512Mi"
-      cpu: "250m"
-    limits:
       memory: "512Mi"
       cpu: "250m"
   receiver:
@@ -87,9 +78,7 @@ web:
     requests:
       memory: "512Mi"
       cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "250m"
+
   clusterEnable: true
 
   adminPassword: admin
