@@ -13,9 +13,6 @@ spec:
   - name: hbase-master
     port: 60000
     protocol: TCP
-  - name: hbase-ui
-    port: 16010
-    protocol: TCP
   - name: hbase-regionserver
     port: 60020
     protocol: TCP
