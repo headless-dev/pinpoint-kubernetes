@@ -42,6 +42,6 @@ Create hbase affinity
 {{- end }}
 
 {{- define "hbase.zookeeper.fullname" -}}
-{{- $name := default "pinpoint-zookeeper" .Values.zookeeper.hostName -}}
+{{- $name := default "pinpoint-zookeeper-hbase" .Values.zookeeper.hostName -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
