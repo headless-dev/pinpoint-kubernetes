@@ -4,6 +4,7 @@ image:
   pullPolicy: IfNotPresent
 serverPort: 8081
 affinity: {}
+tolerations:
 resources:
   requests:
     memory: "512Mi"

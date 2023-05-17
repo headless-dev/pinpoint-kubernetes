@@ -13,6 +13,7 @@ image:
 hbaseVersion: 1.2.6
 
 affinity: {}
+tolerations:
 
 hbase:
   resources:

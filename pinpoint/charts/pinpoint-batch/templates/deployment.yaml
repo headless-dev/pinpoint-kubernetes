@@ -25,6 +25,10 @@ spec:
       affinity:
 {{- toYaml . | nindent 8 }}
 {{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{- toYaml . | nindent 8 }}
+{{- end }}
       initContainers:
         - name: init-zookeeper
           image: busybox:1.28
