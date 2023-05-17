@@ -10,6 +10,7 @@ pinpoint-zookeeper-hbase:
   affinity: {}
 
   zookeeper:
+    hostName:
     image:
       repository: registry.k8s.io/kubernetes-zookeeper
       tag: 1.0-3.4.10
@@ -28,6 +29,10 @@ pinpoint-zookeeper-hbase:
       requests:
         memory: "4Gi"
         cpu: "1"
+
+  persistence:
+    enabled: true
+    size: 2Gi
 
 pinpoint-collector:
   image:
