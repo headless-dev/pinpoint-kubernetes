@@ -21,7 +21,7 @@ hbase:
       cpu: "1"
 
 zookeeper:
-  hostName:
+  host:
   resources:
     requests:
       memory: "256Mi"

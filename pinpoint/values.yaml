@@ -10,7 +10,7 @@ pinpoint-zookeeper-hbase:
   affinity: {}
 
   zookeeper:
-    hostName:
+    host:
     image:
       repository: registry.k8s.io/kubernetes-zookeeper
       tag: 1.0-3.4.10
@@ -81,7 +81,7 @@ pinpoint-web:
     password: admin
     database: pinpoint
   zookeeper:
-    hostName:
+    host:
 
 pinpoint-mysql:
   image:

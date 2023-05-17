@@ -48,4 +48,4 @@ resources:
     cpu: "100m"
 
 zookeeper:
-  hostName:
+  host:
