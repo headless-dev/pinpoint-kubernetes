@@ -80,10 +80,8 @@ pinpoint-web:
     user: admin
     password: admin
     database: pinpoint
-
-  persistence:
-    enabled: true
-    size: 8Gi
+  zookeeper:
+    hostName:
 
 pinpoint-mysql:
   image:
@@ -127,7 +125,8 @@ pinpoint-batch:
     database: pinpoint
   zookeeper:
     host:
-  enabled: false
+  flink:
+    host:
   mail:
     server:
       url: smtp.gmail.com

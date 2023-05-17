@@ -47,8 +47,5 @@ resources:
     memory: "256Mi"
     cpu: "100m"
 
-batch:
-  enable: false
-
 zookeeper:
   hostName:
