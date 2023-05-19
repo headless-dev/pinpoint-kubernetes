@@ -45,3 +45,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ template "batch.fullname" . }}
+            - secretRef:
+                name: {{ template "batch.fullname" . }}
