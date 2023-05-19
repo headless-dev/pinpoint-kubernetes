@@ -73,6 +73,7 @@ pinpoint-web:
   sendUsage: false
   loggingLevelRoot: INFO
   showApplicationStat: true
+  webhookEnable: true
   mysql:
     serviceName:
     host:
@@ -116,6 +117,7 @@ pinpoint-batch:
   profiles: release
   loggingLevelRoot: INFO
   clusterEnable: false
+  webhookEnable: true
   mysql:
     serviceName:
     host:

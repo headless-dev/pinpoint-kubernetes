@@ -29,6 +29,7 @@ sendUsage: true
 profiles: release
 loggingLevelRoot: INFO
 clusterEnable: false
+webhookEnable: true
 mysql:
   serviceName:
   host:
