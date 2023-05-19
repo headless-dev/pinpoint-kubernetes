@@ -118,6 +118,7 @@ pinpoint-batch:
   loggingLevelRoot: INFO
   clusterEnable: false
   webhookEnable: true
+  adminPassword: admin
   mysql:
     serviceName:
     host:

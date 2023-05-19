@@ -30,6 +30,7 @@ profiles: release
 loggingLevelRoot: INFO
 clusterEnable: false
 webhookEnable: true
+adminPassword: admin
 mysql:
   serviceName:
   host:
