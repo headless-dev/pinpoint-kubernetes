@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/component: pinpoint-receiver
     {{- include "receiver.labels" . | nindent 4 }}
 spec:
+  type: NodePort
   ports:
   - name: receiver
     port: 8080
