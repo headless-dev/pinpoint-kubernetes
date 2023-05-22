@@ -166,3 +166,12 @@ pinpoint-receiver:
     repository: pinpointdocker/pinpoint-flink
     tag: 2.5.1
     pullPolicy: IfNotPresent
+  slack:
+    token:
+    channelId:
+    attachment:
+      title: Pinpoint alarm
+      color: "#ff0000"
+      titleLink: http://localhost:8080
+      # Variable list [pinpointUrl, batchEnv, applicationId, serviceType, userGroup, unit, checker, threshold, notes, sequenceCount, value]
+      value: "$applicationId, $name, $value"

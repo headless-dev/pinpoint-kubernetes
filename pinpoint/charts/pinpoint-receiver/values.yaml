@@ -8,3 +8,13 @@ resources:
   requests:
     memory: "256Mi"
     cpu: "125m"
+
+slack:
+  token:
+  channelId:
+  attachment:
+    title: Pinpoint alarm
+    color: "#ff0000"
+    titleLink: http://localhost:8080
+    # Variable list [pinpointUrl, batchEnv, applicationId, serviceType, userGroup, unit, checker, threshold, notes, sequenceCount, value]
+    value: "$applicationId, $name, $value"

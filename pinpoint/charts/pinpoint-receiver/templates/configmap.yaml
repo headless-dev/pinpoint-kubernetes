@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "receiver.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "receiver.name" . }}
+    {{- include "receiver.labels" . | nindent 4 }}
+data:
+  slack_attachment_color: "{{ .Values.slack.attachment.color }}"
+  slack_attachment_title: "{{ .Values.slack.attachment.title }}"
+  slack_attachment_title_link: "{{ .Values.slack.attachment.titleLink }}"
+  slack_attachment_value: "{{ .Values.slack.attachment.value }}"
