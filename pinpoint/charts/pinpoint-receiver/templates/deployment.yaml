@@ -39,3 +39,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ template "receiver.fullname" . }}
+            - secretRef:
+                name: {{ template "receiver.fullname" . }}
