@@ -7,8 +7,6 @@ metadata:
     app.kubernetes.io/component: pinpoint-receiver
     {{- include "receiver.labels" . | nindent 4 }}
 spec:
-  clusterIP: None
-  publishNotReadyAddresses: true
   ports:
   - name: receiver
     port: 8080
