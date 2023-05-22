@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "receiver.fullname" . }}
-  annotations:
-    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
   labels:
     app.kubernetes.io/name: {{ include "receiver.name" . }}
     app.kubernetes.io/component: pinpoint-server

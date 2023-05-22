@@ -2,3 +2,9 @@ image:
   repository: pinpointdocker/pinpoint-batch
   tag: 2.5.1
   pullPolicy: IfNotPresent
+affinity: {}
+tolerations:
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "125m"
