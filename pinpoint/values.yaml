@@ -160,3 +160,9 @@ pinpoint-flink:
 
   zookeeper:
     host:
+
+pinpoint-receiver:
+  image:
+    repository: pinpointdocker/pinpoint-flink
+    tag: 2.5.1
+    pullPolicy: IfNotPresent
