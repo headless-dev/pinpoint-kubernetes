@@ -4,19 +4,19 @@ metadata:
   name: {{ include "receiver.fullname" . }}
   labels:
     app.kubernetes.io/name: {{ include "receiver.name" . }}
-    app.kubernetes.io/component: pinpoint-server
+    app.kubernetes.io/component: pinpoint-receiver
     {{- include "receiver.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "receiver.name" . }}
-      app.kubernetes.io/component: pinpoint-server
+      app.kubernetes.io/component: pinpoint-receiver
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "receiver.name" . }}
-        app.kubernetes.io/component: pinpoint-server
+        app.kubernetes.io/component: pinpoint-receiver
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
     spec:
 {{- with .Values.affinity }}
