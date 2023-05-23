@@ -41,7 +41,7 @@ spec:
 {{- toYaml .Values.resources | nindent 12 }}
           ports:
             - name: batch
-              containerPort: 8080
+              containerPort: 8090
           envFrom:
             - configMapRef:
                 name: {{ template "batch.fullname" . }}
@@ -50,7 +50,7 @@ spec:
           livenessProbe:
             failureThreshold: 10
             tcpSocket:
-              port: 8080
+              port: 8090
             initialDelaySeconds: 45
             periodSeconds: 5
             successThreshold: 1
@@ -58,7 +58,7 @@ spec:
           readinessProbe:
             failureThreshold: 10
             tcpSocket:
-              port: 8080
+              port: 8090
             initialDelaySeconds: 45
             periodSeconds: 5
             successThreshold: 1
