@@ -6,6 +6,7 @@
 
 pinpoint-zookeeper-hbase:
   profiles: release
+  serviceType: NodePort
 
   affinity: {}
 
