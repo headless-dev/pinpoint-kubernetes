@@ -104,6 +104,9 @@ pinpoint-mysql:
       memory: "512Mi"
       cpu: "250m"
   affinity: {}
+  persistence:
+    enabled: false
+    size: 2Gi
 
 
 pinpoint-batch:
