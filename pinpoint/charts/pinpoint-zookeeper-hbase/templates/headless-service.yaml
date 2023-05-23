@@ -9,6 +9,7 @@ metadata:
 spec:
   clusterIP: None
   publishNotReadyAddresses: true
+  type: NodePort
   ports:
   - name: hbase-master
     port: 60000
