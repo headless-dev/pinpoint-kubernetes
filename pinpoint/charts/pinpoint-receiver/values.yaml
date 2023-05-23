@@ -9,6 +9,7 @@ resources:
     memory: "256Mi"
     cpu: "125m"
 
+# add webhook url from receiver service name, ex) pinpoint-receiver/api/slack, https://pinpoint-apm.gitbook.io/pinpoint/documents/alarm#alarm
 slack:
   token:
   channelId:
