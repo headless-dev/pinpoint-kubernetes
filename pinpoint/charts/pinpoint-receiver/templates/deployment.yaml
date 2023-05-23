@@ -43,3 +43,21 @@ spec:
                 name: {{ template "receiver.fullname" . }}
             - secretRef:
                 name: {{ template "receiver.fullname" . }}
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
