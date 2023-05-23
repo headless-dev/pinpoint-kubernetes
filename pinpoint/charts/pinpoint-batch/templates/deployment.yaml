@@ -47,3 +47,19 @@ spec:
                 name: {{ template "batch.fullname" . }}
             - secretRef:
                 name: {{ template "batch.fullname" . }}
+          livenessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8079
+            initialDelaySeconds: 45
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8079
+            initialDelaySeconds: 45
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
