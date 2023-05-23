@@ -16,5 +16,5 @@ slack:
     title: Pinpoint alarm
     color: "#ff0000"
     titleLink: http://localhost:8080
-    # Variable list [pinpointUrl, batchEnv, applicationId, serviceType, userGroup, unit, checker, threshold, notes, sequenceCount, value]
+    # Variable list [pinpointUrl, batchEnv, applicationId, serviceType, userGroupId, userGroupMembers, unit, threshold, notes, sequenceCount, name, value]
     value: "$applicationId, $name, $value"
