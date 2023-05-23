@@ -39,6 +39,7 @@ mysql:
   password: admin
   database: pinpoint
 zookeeper:
-  host:
+  # headless service: pinpoint-zookeeper-hbase-headless
+  host: pinpoint-zookeeper-hbase
 flink:
-  host:
+  host: pinpoint-flink

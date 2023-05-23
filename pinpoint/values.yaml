@@ -55,6 +55,9 @@ pinpoint-collector:
       spanPort: 9996
   loggingLevelRoot: INFO
   clusterEnable: true
+  zookeeper:
+    # headless service: pinpoint-zookeeper-hbase-headless
+    host: pinpoint-zookeeper-hbase
   flink:
     enabled: true
 
@@ -83,7 +86,8 @@ pinpoint-web:
     password: admin
     database: pinpoint
   zookeeper:
-    host:
+    # headless service: pinpoint-zookeeper-hbase-headless
+    host: pinpoint-zookeeper-hbase
 
 pinpoint-mysql:
   image:
@@ -128,9 +132,10 @@ pinpoint-batch:
     password: admin
     database: pinpoint
   zookeeper:
-    host:
+    # headless service: pinpoint-zookeeper-hbase-headless
+    host: pinpoint-zookeeper-hbase
   flink:
-    host:
+    host: pinpoint-flink
   mail:
     server:
       url: smtp.gmail.com
@@ -160,7 +165,8 @@ pinpoint-flink:
       cpu: "256m"
 
   zookeeper:
-    host:
+    # headless service: pinpoint-zookeeper-hbase-headless
+    host: pinpoint-zookeeper-hbase
 
 pinpoint-receiver:
   image:
