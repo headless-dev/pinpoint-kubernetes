@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: {{ include "zookeeper.name" . }}
       app.kubernetes.io/component: zookeeper
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
-  serviceName: {{ include "zookeeper.fullname" . }}-headless
+  serviceName: {{ include "zookeeper.fullname" . }}
   replicas: {{ .Values.replicas }}
   template:
     metadata:
