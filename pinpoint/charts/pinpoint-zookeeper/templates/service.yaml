@@ -11,10 +11,6 @@ spec:
   ports:
   - port: 2181
     name: client
-  - port: 2888
-    name: server
-  - port: 3888
-    name: leader-election
   selector:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
     app.kubernetes.io/component: master
