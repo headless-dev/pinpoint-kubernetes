@@ -6,7 +6,7 @@
 
 pinpoint-zookeeper:
   profiles: release
-  serviceType: ClusterIp
+  serviceType: ClusterIP
 
   replicas: 3
   affinity: {}
