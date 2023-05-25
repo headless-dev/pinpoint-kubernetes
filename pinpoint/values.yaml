@@ -33,7 +33,7 @@ pinpoint-hbase:
 
   image:
     repository: pinpointdocker/pinpoint-hbase
-    tag:
+    tag: 2.5.1
     pullPolicy: IfNotPresent
   resources:
     requests:
