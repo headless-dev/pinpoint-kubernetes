@@ -1,24 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "hbase.fullname" . }}-headless
+  name: {{ include "zookeeper.fullname" . }}-headless
   labels:
-    app.kubernetes.io/name: {{ include "hbase.name" . }}
+    app.kubernetes.io/name: {{ include "zookeeper.name" . }}
     app.kubernetes.io/component: master
-    {{- include "hbase.labels" . | nindent 4 }}
+    {{- include "zookeeper.labels" . | nindent 4 }}
 spec:
   clusterIP: None
   publishNotReadyAddresses: true
   ports:
-  - name: hbase-master
-    port: 60000
-    protocol: TCP
-  - name: hbase-regionserver
-    port: 60020
-    protocol: TCP
-  - name: hbase-regionserver-ui
-    port: 16030
-    protocol: TCP
   - port: 2181
     name: client
   - port: 2888

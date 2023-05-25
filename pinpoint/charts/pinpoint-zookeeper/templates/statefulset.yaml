@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "hbase.fullname" . }}
+  name: {{ include "zookeeper.fullname" . }}
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
   labels:
-    app.kubernetes.io/name: {{ include "hbase.name" . }}
+    app.kubernetes.io/name: {{ include "zookeeper.name" . }}
     app.kubernetes.io/component: master
-    {{- include "hbase.labels" . | nindent 4 }}
+    {{- include "zookeeper.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "hbase.name" . }}
+      app.kubernetes.io/name: {{ include "zookeeper.name" . }}
       app.kubernetes.io/component: master
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
-  serviceName: {{ include "hbase.fullname" . }}-headless
+  serviceName: {{ include "zookeeper.fullname" . }}-headless
   replicas: 1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "hbase.name" . }}
+        app.kubernetes.io/name: {{ include "zookeeper.name" . }}
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
     spec:
