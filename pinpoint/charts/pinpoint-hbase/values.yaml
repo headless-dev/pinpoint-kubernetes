@@ -15,18 +15,10 @@ hbaseVersion: 1.2.6
 affinity: {}
 tolerations:
 serviceType: NodePort
-hbase:
-  resources:
-    requests:
-      memory: "4Gi"
-      cpu: "1"
-
-zookeeper:
-  host:
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "100m"
+resources:
+  requests:
+    memory: "4Gi"
+    cpu: "1"
 
 persistence:
   enabled: true

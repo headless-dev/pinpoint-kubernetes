@@ -2,25 +2,23 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "zookeeper.fullname" . }}
-  annotations:
-    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
   labels:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-    app.kubernetes.io/component: master
+    app.kubernetes.io/component: zookeeper
     {{- include "zookeeper.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-      app.kubernetes.io/component: master
+      app.kubernetes.io/component: zookeeper
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
   serviceName: {{ include "zookeeper.fullname" . }}-headless
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-        app.kubernetes.io/component: master
+        app.kubernetes.io/component: zookeeper
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
     spec:
 {{- with .Values.affinity }}
@@ -32,11 +30,11 @@ spec:
 {{- toYaml . | nindent 8 }}
 {{- end }}
       containers:
-      - name: pinpoint-zookeeper
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        image: registry.k8s.io/kubernetes-zookeeper:1.0-3.4.10
         resources:
-{{ toYaml .Values.zookeeper.resources | indent 10 }}
+{{ toYaml .Values.resources | indent 10 }}
         ports:
           - containerPort: 2181
             name: client
@@ -48,7 +46,7 @@ spec:
           - sh
           - -c
           - "start-zookeeper \
-      --servers=1 \
+      --servers={{ .Values.replicas }} \
       --data_dir=/var/lib/zookeeper/data \
       --data_log_dir=/var/lib/zookeeper/data/log \
       --conf_dir=/opt/zookeeper/conf \

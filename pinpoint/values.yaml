@@ -8,28 +8,17 @@ pinpoint-zookeeper:
   profiles: release
   serviceType: NodePort
 
+  replicas: 3
   affinity: {}
 
-  zookeeper:
-    host:
-    image:
-      repository: registry.k8s.io/kubernetes-zookeeper
-      tag: 1.0-3.4.10
-      pullPolicy: IfNotPresent
-    resources:
-      requests:
-        memory: "256Mi"
-        cpu: "100m"
-
-  hbase:
-    image:
-      repository: pinpointdocker/pinpoint-hbase
-      tag:
-      pullPolicy: IfNotPresent
-    resources:
-      requests:
-        memory: "4Gi"
-        cpu: "1"
+  image:
+    repository: registry.k8s.io/kubernetes-zookeeper
+    tag: 1.0-3.4.10
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
 
   persistence:
     enabled: true
@@ -42,30 +31,20 @@ pinpoint-hbase:
 
   affinity: {}
 
+  image:
+    repository: pinpointdocker/pinpoint-hbase
+    tag:
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "1"
   zookeeper:
     host:
-    image:
-      repository: registry.k8s.io/kubernetes-zookeeper
-      tag: 1.0-3.4.10
-      pullPolicy: IfNotPresent
-    resources:
-      requests:
-        memory: "256Mi"
-        cpu: "100m"
-
-  hbase:
-    image:
-      repository: pinpointdocker/pinpoint-hbase
-      tag:
-      pullPolicy: IfNotPresent
-    resources:
-      requests:
-        memory: "4Gi"
-        cpu: "1"
 
   persistence:
     enabled: true
-    size: 2Gi
+    size: 10Gi
 
 pinpoint-collector:
   image:
@@ -88,8 +67,8 @@ pinpoint-collector:
   loggingLevelRoot: INFO
   clusterEnable: true
   zookeeper:
-    # headless service: pinpoint-zookeeper-hbase-headless
-    host: pinpoint-zookeeper-hbase
+    # headless service: pinpoint-zookeeper-headless
+    host: pinpoint-zookeeper
   flink:
     enabled: true
 
@@ -118,8 +97,8 @@ pinpoint-web:
     password: admin
     database: pinpoint
   zookeeper:
-    # headless service: pinpoint-zookeeper-hbase-headless
-    host: pinpoint-zookeeper-hbase
+    # headless service: pinpoint-zookeeper-headless
+    host: pinpoint-zookeeper
 
 pinpoint-mysql:
   image:
@@ -167,8 +146,8 @@ pinpoint-batch:
     password: admin
     database: pinpoint
   zookeeper:
-    # headless service: pinpoint-zookeeper-hbase-headless
-    host: pinpoint-zookeeper-hbase
+    # headless service: pinpoint-zookeeper-headless
+    host: pinpoint-zookeeper
   flink:
     host: pinpoint-flink
   mail:
@@ -200,8 +179,8 @@ pinpoint-flink:
       cpu: "256m"
 
   zookeeper:
-    # headless service: pinpoint-zookeeper-hbase-headless
-    host: pinpoint-zookeeper-hbase
+    # headless service: pinpoint-zookeeper-headless
+    host: pinpoint-zookeeper
 
 pinpoint-receiver:
   image:
