@@ -4,7 +4,6 @@ metadata:
   name: {{ include "zookeeper.fullname" . }}
   labels:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-    app.kubernetes.io/component: master
     {{- include "zookeeper.labels" . | nindent 4 }}
 spec:
   type: "{{ .Values.serviceType }}"
@@ -13,5 +12,4 @@ spec:
     name: client
   selector:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-    app.kubernetes.io/component: master
     app.kubernetes.io/instance: {{ .Release.Name }}
