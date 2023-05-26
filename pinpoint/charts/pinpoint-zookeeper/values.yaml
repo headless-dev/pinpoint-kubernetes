@@ -11,6 +11,8 @@ image:
 
 # The version of the hadoop libraries being used in the image.
 hbaseVersion: 1.2.6
+serverPort: 2888
+leaderElectionPort: 3888
 
 affinity: {}
 tolerations:

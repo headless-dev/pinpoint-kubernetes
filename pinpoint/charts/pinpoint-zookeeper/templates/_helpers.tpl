@@ -45,3 +45,15 @@ Create zookeeper affinity
 {{- $name := default "pinpoint-zookeeper-zookeeper" .Values.zookeeper.host -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "zookeeper.serverlist" -}}
+{{- $namespace := .Release.Namespace }}
+{{- $name := include "zookeeper.fullname" . -}}
+{{- $serverPort := .Values.serverPort -}}
+{{- $leaderElectionPort := .Values.leaderElectionPort -}}
+{{- $zk := dict "servers" (list) -}}
+{{- range $idx, $v := until (int .Values.replicas) }}
+{{- $noop := printf "%s-%d.%s-headless.%s:%d:%d" $name $idx $name $namespace (int $serverPort) (int $leaderElectionPort) | append $zk.servers | set $zk "servers" -}}
+{{- end }}
+{{- printf "%s" (join ";" $zk.servers) | quote -}}
+{{- end -}}
