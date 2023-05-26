@@ -1,4 +1,4 @@
-{{- if .Values.global.batchEnabled and .Values.global.webhookEnabled }}
+{{- if and (.Values.global.batchEnabled) (.Values.global.webhookEnabled) }}
 apiVersion: v1
 kind: Service
 metadata:
