@@ -45,16 +45,22 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         readinessProbe:
+          failureThreshold: 10
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          initialDelaySeconds: 30
           timeoutSeconds: 2
         livenessProbe:
+          failureThreshold: 10
           httpGet:
             path: /
             port: 16010
-          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          initialDelaySeconds: 30
           timeoutSeconds: 2
         volumeMounts:
           - name: hbase-config
