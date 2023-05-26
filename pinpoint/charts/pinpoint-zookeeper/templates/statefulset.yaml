@@ -41,7 +41,7 @@ spec:
             name: leader-election
         env:
           - name: ZOOKEEPER_SERVERS
-            value: {{ template "cp-zookeeper.serverlist" . }}
+            value: {{ template "zookeeper.serverlist" . }}
         command:
           - sh
           - -c
