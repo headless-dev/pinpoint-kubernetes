@@ -4,7 +4,6 @@ metadata:
   name: {{ include "zookeeper.fullname" . }}-headless
   labels:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-    app.kubernetes.io/component: zookeeper
     {{- include "zookeeper.labels" . | nindent 4 }}
 spec:
   clusterIP: None
@@ -16,5 +15,4 @@ spec:
     name: leader-election
   selector:
     app.kubernetes.io/name: {{ include "zookeeper.name" . }}
-    app.kubernetes.io/component: zookeeper
     app.kubernetes.io/instance: {{ .Release.Name }}
