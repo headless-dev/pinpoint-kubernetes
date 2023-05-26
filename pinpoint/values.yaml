@@ -5,6 +5,7 @@
 # See this repo for image build details: https://github.com/Comcast/kube-yarn/tree/master/image
 
 batchEnabled: false
+webhookEnabled: false
 
 pinpoint-zookeeper:
   profiles: release
@@ -90,7 +91,6 @@ pinpoint-web:
   sendUsage: false
   loggingLevelRoot: INFO
   showApplicationStat: true
-  webhookEnable: true
   mysql:
     serviceName:
     host:
@@ -138,7 +138,6 @@ pinpoint-batch:
   profiles: release
   loggingLevelRoot: INFO
   clusterEnable: false
-  webhookEnable: true
   adminPassword: admin
   mysql:
     serviceName:
