@@ -10,6 +10,7 @@ image:
   pullPolicy: IfNotPresent
 
 # The version of the hadoop libraries being used in the image.
+baseDir: /opt/hbase
 hbaseVersion: 1.2.6
 
 affinity: {}
