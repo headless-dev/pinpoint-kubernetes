@@ -48,9 +48,6 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
-        envFrom:
-          - configMapRef:
-              name: {{ include "hbase.fullname" . }}
         readinessProbe:
           failureThreshold: 10
           httpGet:
